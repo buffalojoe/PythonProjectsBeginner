@@ -11,11 +11,14 @@ def readTasks(fileName):
 
 def addTask(fileName):
     inputFile = open(fileName, "a")
-    newTask = input("What task would you like to create?\n")
+    newTask = input("What task would you like to create? (Separate by \";\" to create multiple tasks at once)\n")
+
+    newTasks = newTask.split(";")
 
     try:
-        inputFile.write(newTask + "\n")
-        print(f"Successfully created task: {newTask}")
+        for item in newTasks:
+            inputFile.write(item + "\n")
+            print(f"Successfully created task: {item}")
         inputFile.close()
         return None
     except:
@@ -52,9 +55,19 @@ def deleteTask(fileName):
         print(f"Successfully deleted task: {taskToDelete}")
         return None
     
+def deleteAllTasks(fileName):
+    disclaimer = input("WARNING: This operation will delete all tasks on your task list. Would you like to proceed? (Y)\n").lower()
+    if disclaimer == "yes" or disclaimer == "y":
+        outputFile = open(fileName, "w")
+        outputFile.close()
+        print("All tasks deleted successfully")
+        return None      
+    
+    print("Operation aborted")
+    return None
 
 def main(fileName):
-    operation = input("Would you like to 'Read (r)', 'Add (a)', or 'Delete (d)' tasks?\n").lower()
+    operation = input("Would you like to 'Read (r)', 'Add (a)', 'Delete (d)', or 'Delete All (da)' tasks?\n").lower()
 
     if operation == 'read' or operation == 'r':
         readTasks(fileName)
@@ -67,8 +80,12 @@ def main(fileName):
     if operation == 'delete' or operation == 'd':
         deleteTask(fileName)
         return None
+    
+    if operation == 'delete all' or operation == 'da':
+        deleteAllTasks(fileName)
+        return None
 
-    print("Input must be 'Read (r)', 'Add (a)', or 'Delete (d)")
+    print("Input must be 'Read (r)', 'Add (a)', 'Delete (d), or Delete All (da)")
     return None
 
 fileName = 'todo.txt'
