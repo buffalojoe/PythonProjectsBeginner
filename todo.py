@@ -10,6 +10,10 @@ def readTasks(fileName):
     return None
 
 def addTask(fileName):
+    inputFile = open(fileName, "r")
+    taskLength = len(inputFile.readlines())
+    inputFile.close()
+
     inputFile = open(fileName, "a")
     newTask = input("What task would you like to create? (Separate by \";\" to create multiple tasks at once)\n")
 
@@ -17,8 +21,9 @@ def addTask(fileName):
 
     try:
         for item in newTasks:
-            inputFile.write(item + "\n")
-            print(f"Successfully created task: {item}")
+            taskLength += 1
+            inputFile.write(f"{taskLength}: {item}\n")
+            print(f"Successfully created task: {item}")           
         inputFile.close()
         return None
     except:
@@ -28,15 +33,16 @@ def addTask(fileName):
     
 def deleteTask(fileName):
     inputFile = open(fileName, "r")
-    tasks = []
+    taskMap = {}
+    
     for line in inputFile.readlines():
-        line = line.strip()
-        tasks.append(line)   
+        line.strip()
+        taskMap[line[:line.find(":")]] = line[line.find(":") + 2:].strip()
     inputFile.close()
 
-    taskToDelete = input("Which task would you like to delete?\n")
+    taskToDelete = input("Which task would you like to delete? Enter the Task number\n")
 
-    if taskToDelete not in tasks:
+    if taskToDelete not in taskMap.keys():
         print("This task does not exist")
         tryAgain = input("Would you like to try again? (Y)\n").lower()
 
@@ -44,16 +50,29 @@ def deleteTask(fileName):
             deleteTask(fileName)
         else:
             return None
-    
-    if taskToDelete in tasks:
-        tasks.remove(taskToDelete)
-        outputFile = open(fileName, "w")
-        for item in tasks:
-            outputFile.write(item + "\n")
 
-        outputFile.close()
-        print(f"Successfully deleted task: {taskToDelete}")
-        return None
+    if taskToDelete in taskMap.keys():
+        try:
+            deleted = taskMap[taskToDelete]
+            taskMap.pop(taskToDelete)
+            newTaskMap = {}
+            
+            iterator = 1
+            for value in taskMap.values():
+                newTaskMap[iterator] = value
+                iterator += 1
+
+            outputFile = open(fileName, "w")
+            for key, value in newTaskMap.items():
+                outputFile.write(f"{key}: {value}\n")
+            
+            outputFile.close()
+            print(f"Successfully deleted task: {deleted}")
+            
+        except:
+            print("There was an error deleting your task")
+            return None
+
     
 def deleteAllTasks(fileName):
     disclaimer = input("WARNING: This operation will delete all tasks on your task list. Would you like to proceed? (Y)\n").lower()
