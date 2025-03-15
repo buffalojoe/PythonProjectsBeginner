@@ -6,5 +6,4 @@
 6: Workout
 7: Cook dinner
 8: Do dishes
-9: Brush teeth again
-10: Sleep
+9: Sleep

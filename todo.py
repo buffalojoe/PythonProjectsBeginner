@@ -85,7 +85,8 @@ def deleteAllTasks(fileName):
     print("Operation aborted")
     return None
 
-def main(fileName):
+def main():
+    fileName = 'todo.txt'
     operation = input("Would you like to do?\n- Read(r)\n- Add(a)\n- Delete(d)\n- Delete All(da)\n").lower()
 
     if operation == 'read' or operation == 'r':
@@ -107,5 +108,4 @@ def main(fileName):
     print("\nInput Invalid:\n- Read(r)\n- Add(a)\n- Delete(d)\n- Delete All(da)\n")
     return None
 
-fileName = 'todo.txt'
-main(fileName)
+main()
