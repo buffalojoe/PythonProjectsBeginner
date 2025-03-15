@@ -15,6 +15,21 @@ def findWord(dictionary):
     
     return words[index]
 
+def modeSelect(word):
+    mode = input("Select a difficulty:\nEasy\nMedium\nHard\n").lower()
+
+    if mode == "easy" or mode == "e":
+        guessLimit = len(word) + 15
+    elif mode == "medium" or mode == "m":
+        guessLimit = len(word) + 8
+    elif mode == "hard" or mode == "h":
+        guessLimit = len(word) + 1
+    else:
+        print("Invalid mode selection")
+        return None
+    
+    return guessLimit
+
 # Play the hangman game
 def guess(word, foundWord, guessCount, guessLimit, guessedLetters):
     print(f"Word progress: {foundWord}")
@@ -56,20 +71,13 @@ def guess(word, foundWord, guessCount, guessLimit, guessedLetters):
 
 # Run the program
 def main():
-    mode = input("Select a difficulty:\nEasy\nMedium\nHard\n").lower()
     dictionary = "dictionary.txt"
     word = findWord(dictionary)
 
-    if mode == "easy" or mode == "e":
-        guessLimit = len(word) + 15
-    elif mode == "medium" or mode == "m":
-        guessLimit = len(word) + 8
-    elif mode == "hard" or mode == "h":
-        guessLimit = len(word) + 1
-    else:
-        print("Invalid mode selection")
+    guessLimit = modeSelect(word)
+    if guessLimit == None:
         return None
-    
+
     guessCount = 0
     guessedLetters = []
     foundWord = []
