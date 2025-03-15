@@ -34,7 +34,7 @@ def addTask(fileName):
 def deleteTask(fileName):
     inputFile = open(fileName, "r")
     taskMap = {}
-    
+
     for line in inputFile.readlines():
         line.strip()
         taskMap[line[:line.find(":")]] = line[line.find(":") + 2:].strip()
@@ -44,7 +44,7 @@ def deleteTask(fileName):
 
     if taskToDelete not in taskMap.keys():
         print("This task does not exist")
-        tryAgain = input("Would you like to try again? (Y)\n").lower()
+        tryAgain = input("Would you like to try again? (Y/N)\n").lower()
 
         if tryAgain == "y" or tryAgain == "yes":
             deleteTask(fileName)
@@ -75,7 +75,7 @@ def deleteTask(fileName):
 
     
 def deleteAllTasks(fileName):
-    disclaimer = input("WARNING: This operation will delete all tasks on your task list. Would you like to proceed? (Y)\n").lower()
+    disclaimer = input("WARNING: This operation will delete all tasks on your task list. Would you like to proceed? (Y/N)\n").lower()
     if disclaimer == "yes" or disclaimer == "y":
         outputFile = open(fileName, "w")
         outputFile.close()
@@ -86,7 +86,7 @@ def deleteAllTasks(fileName):
     return None
 
 def main(fileName):
-    operation = input("Would you like to 'Read (r)', 'Add (a)', 'Delete (d)', or 'Delete All (da)' tasks?\n").lower()
+    operation = input("Would you like to do?\n- Read(r)\n- Add(a)\n- Delete(d)\n- Delete All(da)\n").lower()
 
     if operation == 'read' or operation == 'r':
         readTasks(fileName)
@@ -104,7 +104,7 @@ def main(fileName):
         deleteAllTasks(fileName)
         return None
 
-    print("Input must be 'Read (r)', 'Add (a)', 'Delete (d), or Delete All (da)")
+    print("\nInput Invalid:\n- Read(r)\n- Add(a)\n- Delete(d)\n- Delete All(da)\n")
     return None
 
 fileName = 'todo.txt'

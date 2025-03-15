@@ -1,1 +1,10 @@
-1: Eat breakfast
+1: Wake up
+2: Eat breakfast
+3: Brush teeth
+4: Get dressed
+5: Work
+6: Workout
+7: Cook dinner
+8: Do dishes
+9: Brush teeth again
+10: Sleep
