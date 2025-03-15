@@ -1,1 +1,8 @@
 Word : representation, Mode : medium, Guess Count : 11, Guess Limit : 20, Result : Won
+Word : autos, Mode : hard, Guess Count : 6, Guess Limit : 6, Result : Lost
+Word : expiration, Mode : hard, Guess Count : 11, Guess Limit : 11, Result : Lost
+Word : tripadvisor, Mode : easy, Guess Count : 16, Guess Limit : 23, Result : Won
+Word : harold, Mode : medium, Guess Count : 12, Guess Limit : 12, Result : Lost
+Word : baths, Mode : easy, Guess Count : 17, Guess Limit : 17, Result : Lost
+Word : supervision, Mode : easy, Guess Count : 14, Guess Limit : 23, Result : Won
+Word : dispatched, Mode : hard, Guess Count : 11, Guess Limit : 11, Result : Lost

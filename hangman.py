@@ -20,7 +20,7 @@ def findWord(dictionary):
 
 # Select a mode that will determine the number of guesses allowed
 def modeSelect(word):
-    mode = input("Select a difficulty:\nEasy\nMedium\nHard\n").lower()
+    mode = input("Select a difficulty:\nEasy(e)\nMedium(m)\nHard(h)\n").lower()
 
     if mode == "easy" or mode == "e":
         guessLimit = len(word) + 12
@@ -53,6 +53,7 @@ def logResult(word, mode, guessCount, guessLimit, result):
 # Play the hangman game
 def guess(word, foundWord, guessCount, guessLimit, guessedLetters):
     print(f"Word progress: {foundWord}")
+    print(f"Guessed Letters: {guessedLetters}")
     print(f"Guess Count: {guessCount}\n")
 
     if guessCount == guessLimit:
