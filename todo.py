@@ -28,48 +28,48 @@ def deleteTask(fileName):
     tasks = []
     for line in inputFile.readlines():
         line = line.strip()
-        line = line.lower()
         tasks.append(line)   
     inputFile.close()
 
-    deleteTask = input("Which task would you like to delete?\n")
-    deleteTask = deleteTask.lower()
+    taskToDelete = input("Which task would you like to delete?\n")
 
-    if deleteTask not in tasks:
+    if taskToDelete not in tasks:
         print("This task does not exist")
-        return None
+        tryAgain = input("Would you like to try again? (Y)\n").lower()
+
+        if tryAgain == "y" or tryAgain == "yes":
+            deleteTask(fileName)
+        else:
+            return None
     
-    if deleteTask in tasks:
-        tasks.remove(deleteTask)
+    if taskToDelete in tasks:
+        tasks.remove(taskToDelete)
         outputFile = open(fileName, "w")
         for item in tasks:
             outputFile.write(item + "\n")
 
         outputFile.close()
-        print(f"Successfully deleted {deleteTask}")
+        print(f"Successfully deleted task: {taskToDelete}")
         return None
     
 
 def main(fileName):
-    operation = input("Would you like to 'Read', 'Add', or 'Delete' tasks?\n")
-    operation = operation.lower()
+    operation = input("Would you like to 'Read (r)', 'Add (a)', or 'Delete (d)' tasks?\n").lower()
 
-    if operation != "read" and operation != 'add' and operation != 'delete':
-        print("Input must be 'Read', 'Add', or 'Delete")
-        return None
-
-    if operation == 'read':
+    if operation == 'read' or operation == 'r':
         readTasks(fileName)
         return None
     
-    if operation == 'add':
+    if operation == 'add' or operation == 'a':
         addTask(fileName)
         return None
     
-    if operation == 'delete':
+    if operation == 'delete' or operation == 'd':
         deleteTask(fileName)
         return None
-    
+
+    print("Input must be 'Read (r)', 'Add (a)', or 'Delete (d)")
+    return None
 
 fileName = 'todo.txt'
 main(fileName)
